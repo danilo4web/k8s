@@ -10,11 +10,26 @@ $ sudo mv ./kubectl /usr/local/bin/kubectl
 #### install minikube
 ```
 $ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-chmod +x ./minikube
-sudo mv ./minikube /usr/local/bin/minikube
+$ chmod +x ./minikube
+$ sudo mv ./minikube /usr/local/bin/minikube
 ```
 
+#### Minikube start
 ```
-minikube start
-kubectl get deployments
+$ minikube start
+$ minikube dashboard
+```
+
+#### Deployment
+```
+$ kubectl create -f deployment.yaml
+$ kubectl get pods
+$ kubectl get deployments
+```
+
+##### Scale:
+```
+$ kubectl scale deployment nginx-deployment -- replicas=10
+$ kubectl get deploy
+$ kubectl get pods -w
 ```
