@@ -27,7 +27,7 @@ $ kubectl get pods
 $ kubectl get deployments
 ```
 
-##### Scale:
+#### Scale:
 ```
 $ kubectl scale deployment nginx-deployment -- replicas=10
 $ kubectl get deploy
