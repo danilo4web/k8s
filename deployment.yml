@@ -1,21 +1,35 @@
+```
+kind: Service
+apiVersion: v1
+metadata:
+    name: helloworldservice
+spec:
+    selector:
+            app: hello-world
+    ports:
+        - protocol: "TCP"
+          port: 8080
+          targetPort: 80
+          nodePort: 300001
+    type: loadBalancer
+
+
+
+```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: nginx-deployment
+    name: hello-world
     labels:
         app: nginx
 spec:
-    replicas: 3
-    selector:
-        matchLabels:
-            app: nginx
+    replicas: 5
     template:
         metadata:
             labels:
-                app: nginx
+                app: hello-world
         spec:
             containers:
-                - name: nginx
-                  image: nginx:1.14.2
+                - name: tutum/hello-world
                   ports:
                       - containerPort: 80
