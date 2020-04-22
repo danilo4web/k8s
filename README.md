@@ -22,14 +22,26 @@ $ minikube dashboard
 
 #### Deployment
 ```
-$ kubectl create -f deployment.yaml
+$ kubectl create -f deployment.yml
+```
+
+#### GET
+```
 $ kubectl get pods
+$ kubectl get services
 $ kubectl get deployments
+ ```
+
+#### Delete Deployment
+```
+$ kubectl delete pods nginx
+$ kubectl delete services nginx
+$ kubectl delete deployments nginx
 ```
 
 #### Scale:
 ```
-$ kubectl scale deployment nginx-deployment -- replicas=10
+$ kubectl scale deployment --replicas=10 hello-world-deployment
 $ kubectl get deploy
 $ kubectl get pods -w
 ```
