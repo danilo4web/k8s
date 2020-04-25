@@ -45,3 +45,48 @@ $ kubectl scale deployment --replicas=10 hello-world-deployment
 $ kubectl get deploy
 $ kubectl get pods -w
 ```
+
+
+## Cluster K8S
+
+#### disabe swap
+```
+swapoff -a
+```
+
+#### install docker
+```
+sudo apt-get update &&  
+sudo apt install docker.io && 
+sudo systemctl enable docker.service &&
+docker info | grep -i cgroup
+```
+
+#### install (kubelet | kubeadm | kubectl)
+```
+sudo apt-get update
+sudo apt-get install -y apt-transport-https && 
+sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && 
+sudo echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/kubernetes.list &&
+sudo apt-get update &&
+sudo apt-get install -y kubelet kubeadm kubectl && 
+sudo sed -i "s/cgroup-driver=systemd/cgroup-driver=cgroupfs/g" /etc/systemd/system/kubelet.service.d/10-kubeadm.conf && 
+sudo systemctl daemon-reload && 
+sudo systemctl restart kubelet
+```
+
+#### create master server
+```
+sudo kubeadm init --v=5 --apiserver-advertise-address $(hostname -i) --ignore-preflight-errors=NumCPU &&
+mkdir -p $HOME/.kube &&
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config &&
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+```
+
+##### *** just run kubeadm join on slave servers
+
+
+### recovery token
+```
+kubeadm token create --print-join-command
+```
